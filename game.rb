@@ -3,11 +3,18 @@ class Game
   attr_accessor :current_player
   attr_reader :turn
 
-  def initialize(p1, p2)
-    @player1 = p1
-    @player2 = p2
-    @current_player = @player1
-    @turn = 1;
+  def initialize()
+    print "Welcome! If you're here to pit your mathematical chops against your friend, enter a name for Player 1: "
+    @player_1 = Player.new(gets.chomp)
+    print "Player 2: "
+    @player_2 = Player.new(gets.chomp)
+    # @player_1 = p1
+    # @player_2 = p2
+    @current_player = @player_1
+    puts "Today's player's are: #{@player_1.name} and #{@player_2.name}."
+    puts "It's your turn, #{@current_player.name}, press ENTER to start."
+    gets
+    new_turn()
   end
 
   def new_turn()
@@ -28,8 +35,8 @@ class Game
   end
 
   def check_lives()
-    if @player1.lives > 0 && @player2.lives > 0
-      puts "End of #{@current_player.name}'s turn.\n *** #{@player1.name}: #{@player1.lives}/3 vs. #{@player2.name}: #{@player2.lives}/3 ***"
+    if @player_1.lives > 0 && @player_2.lives > 0
+      puts "End of #{@current_player.name}'s turn.\n *** #{@player_1.name}: #{@player_1.lives}/3 vs. #{@player_2.name}: #{@player_2.lives}/3 ***"
       @current_player = player_opposite()
       new_turn()
     else
@@ -42,7 +49,7 @@ class Game
   end
 
   def player_opposite()
-    @current_player == @player1 ? @player2 : @player1
+    @current_player == @player_1 ? @player_2 : @player_1
   end
 
 end
